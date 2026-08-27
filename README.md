@@ -27,13 +27,14 @@ Because these records can serve as evidence of education, employment, and profes
 
 3. Project Structure
 
-
+![image](assets/3.png)
 
 
 4. Admin Role Architecture
 
 The system uses a two-tier RBAC model backed by two database tables:
 
+![image](assets/4.png)
 
 
 Super Admin
@@ -49,7 +50,7 @@ Each admin can hold access to any combination of the three systems:
 
 
 
-
+![image](assets/5.png)
 
 
 
@@ -58,17 +59,18 @@ Each admin can hold access to any combination of the three systems:
 5. Authentication & Session Security
 
 Authentication is handled by ‘routes/auth.js’ and the ‘requireAccess.js’ middleware.
-
  Login Flow
+ ![image](assets/6.png)
+ 
  6. Security Controls
 6.1 Brute-Force Protection (‘middleware/loginRateLimiter.js’)
 - Tracks failed login attempts per email in an in-memory ‘Map’
 - After 3 failed attempts, the account is locked for 5 minutes
 - Lockout response: ‘HTTP 429’ with ‘retryAfterMs’ and ‘retryAfterSec’ fields
 - Successful login clears the counter via ‘resetAttempts(email)’
+ ![image](assets/7.png)
 
-
-
+ ![image](assets/8.png)
 6.2 IP Banning (‘middleware/ipBan.js’)
 - Banned IPs are loaded from the ‘banned_ips’ MySQL table into an in-memory ‘Set’ on startup
 - ‘ipBanMiddleware’ runs globally before all routes — banned IPs receive ‘HTTP 403’ immediately
