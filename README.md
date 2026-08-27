@@ -22,6 +22,7 @@ Because these records can serve as evidence of education, employment, and profes
 
 2. System Architecture
 
+![image](assets/2.png)
 
 
 3. Project Structure
