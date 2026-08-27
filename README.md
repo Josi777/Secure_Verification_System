@@ -12,7 +12,7 @@ This repository contains a sanitized technical representation of the system for 
 
 The Certificate, Job Experience & Recommendation Verification System is a full-stack web application built with Node.js, Express.js, and MySQL. It provides controlled workflows for issuing, managing, and publicly verifying three types of professional credentials
 
-
+![image](assets/1.png)
 
 Training Certificates — issued with a UUID-based cert ID, a QR code pointing to a public verification URL, and an optional PDF/image document upload.
 Job Experience Records— issued by HR admins, each with a unique exp ID and a verifiable document attachment.
