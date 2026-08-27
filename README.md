@@ -68,23 +68,24 @@ Authentication is handled by ‘routes/auth.js’ and the ‘requireAccess.js’
 - After 3 failed attempts, the account is locked for 5 minutes
 - Lockout response: ‘HTTP 429’ with ‘retryAfterMs’ and ‘retryAfterSec’ fields
 - Successful login clears the counter via ‘resetAttempts(email)’
- ![image](assets/7.png)
+ ![image](assets/6(1).png)
 
- ![image](assets/8.png)
+ ![image](assets/6(3).png)
 6.2 IP Banning (‘middleware/ipBan.js’)
 - Banned IPs are loaded from the ‘banned_ips’ MySQL table into an in-memory ‘Set’ on startup
 - ‘ipBanMiddleware’ runs globally before all routes — banned IPs receive ‘HTTP 403’ immediately
 - Auto-ban: if an IP accumulates 5 or more failed verification scans (across all three sub-systems) within 10 minutes, it is automatically inserted into ‘banned_ips’ and the in-memory set is updated without restart
 - Super admins can manually ban/unban IPs via the console (‘POST /api/auth/ban-ip’, ‘/unban-ip’)
+- 
+ ![image](assets/7.png)
 
 
 6.3 Audit Logging (‘middleware/auditLogger.js’)
 Every sensitive action calls ‘logAudit(req, action, details)’, which writes a row to the ‘audit_logs’ table:
 
+ ![image](assets/9.png)
 
-
-
-
+  ![image](assets/8.png)
 
 6.4 Secure File Serving
 Uploaded documents are not served as raw static files. Every request to ‘/uploads/:system/:filename’ is intercepted:
@@ -102,8 +103,6 @@ Uploaded documents are not served as raw static files. Every request to ‘/uplo
 - File uploads restricted to PDF and image MIME types only (enforced in multer ‘fileFilter’)
 - File size capped at 10 MB per upload
 - System names validated against an allowlist: ‘[‘certificate’, ‘experience’, ‘recommendation’]’
-
-
 
 7. Core Modules
 
@@ -133,29 +132,18 @@ Three public routes (no authentication required):
 Each scan is logged (IP, user-agent, timestamp, document ID or `NULL` for failed lookups). Failed lookups accumulate toward the auto-ban threshold.
 
 8. Database Schema (Key Tables)
+ ![image](assets/10.png)
+
  9. Verification Workflow
+ ![image](assets/11.png)
 
 10. Technology Stack
 
-
-
-
-
-
-
-
-
-
-
-
-
+ ![image](assets/12.png)
 
 12. Security Threat-to-Control Mapping
 
-
-
-
-
+ ![image](assets/13.png)
 
 13. Secure Software Development Principles
 
